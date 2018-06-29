@@ -1,0 +1,7 @@
+unemp <- read.csv("unemp.csv")
+set.seed(1)
+grpunemp <- kmeans(unemp[,c("mean","stddev")],centers=5,nstart=10)
+o <- order(grpunemp$cluster)
+data.frame(unemp$state[o],grpunemp$cluster[o])
+plot(unemp$mean,unemp$stddev,type="n",xlab="mean",ylab="standar deviation")
+text(x=unemp$mean,y=unemp$stddev,lables=unemp$state,col=grpunemp$cluster+1)

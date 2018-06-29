@@ -1,0 +1,10 @@
+data <- read.csv("pollute.txt",header=T,sep='\t')
+y <- data$Pollution
+x <-ifelse(y>30,1,0)
+#read(row_data)
+row_data=data.frame(data,x)
+head(row_data)
+library(rpart)
+tree_fit <- rpart(x~Temp+Industry+Population+Wind+Rain+Wet.days,method="class",data=row_data)
+plot(tree_fit,uniform=TRUE,main="Classification Tree Cars")
+text(tree_fit,use.n=TRUE,all=TRUE,cex=.9)
